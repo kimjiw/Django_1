@@ -22,3 +22,10 @@ def deleteTodo (request):
     todo.delete()
     #print('done todo id: {}'.format(done_todo_id))
     return HttpResponseRedirect(reverse('index'))
+
+def doneTodo (request):
+    done_todo_id = request.GET['todoNum']
+    todo = Todo.objects.get(id=done_todo_id)
+    todo.isDone = True
+    todo.save()
+    return HttpResponseRedirect(reverse('index'))
